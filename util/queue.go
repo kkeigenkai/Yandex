@@ -77,3 +77,9 @@ func (q *LinkedQueue[T]) Back() (v T) {
 	}
 	return
 }
+
+func (q *LinkedQueue[T]) Clear() {
+	q.Size = 0
+	q.First = nil
+	q.Last = nil
+}
