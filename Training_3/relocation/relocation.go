@@ -6,7 +6,6 @@ import (
 
 func Relocation(cnt int, si []int) []int {
 	stack := util.CreateLinkedStack[[2]int]()
-	stack.Push([2]int{si[0], 0})
 	for i := 1; i < len(si); i++ {
 		if si[i] >= stack.Val[0] {
 			stack.Push([2]int{si[i], i})
