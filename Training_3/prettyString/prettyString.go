@@ -1,37 +1,38 @@
 package prettystring
 
-import "fmt"
-
 func PrettyString(s string, swap int) (mpr int) {
-	mi := make(map[rune][]int)
-
-	for i, c := range s {
-		mi[c] = append(mi[c], i)
+	if len(s) == 0 {
+		return 0
+	} else if len(s) == 1 {
+		return 1
 	}
-
-	mm := make(map[rune]int)
-
-	for k, v := range mi {
-		curM := 0
-		for i := len(v) - 1; i > 0; i-- {
-			curM += v[i] - v[i-1] + 1
+	for i := 97; i <= 122; i++ {
+		curSwap := swap
+		curMax := 0
+		for l, r := 0, 0; r < len(s) && l < len(s); {
+			if int(s[r]) == i {
+				curMax++
+				r++
+			} else if int(s[r]) != i && curSwap != 0 {
+				curMax++
+				r++
+				curSwap--
+			} else if int(s[r]) != i && curSwap == 0 {
+				if mpr < curMax {
+					mpr = curMax
+				}
+				if int(s[l]) == i {
+					l++
+					curMax--
+				} else {
+					l++
+					curSwap++
+					curMax--
+				}
+			}
 		}
-		mm[k] = curM
-	}
-	fmt.Println(mi)
-	fmt.Println(mm)
-	return
-}
-
-func minMax(m map[rune]int) (min, max int) {
-	min = 1
-	max = 0
-	for _, v := range m {
-		if min > v {
-			min = v
-		}
-		if max < v {
-			max = v
+		if curMax > mpr {
+			mpr = curMax
 		}
 	}
 	return
