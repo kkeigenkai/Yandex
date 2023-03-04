@@ -20,6 +20,7 @@ func (h *SliceHeap) Pop() (v int) {
 	v = (*h)[0]
 	(*h)[0] = (*h)[len(*h)-1]
 	pos := 0
+
 	for pos*2+2 < len(*h) {
 		maxPos := leftSon(pos)
 		if (*h)[maxPos] < (*h)[rightSon(pos)] {
@@ -32,6 +33,7 @@ func (h *SliceHeap) Pop() (v int) {
 			break
 		}
 	}
+
 	*h = (*h)[:len(*h)-1]
 	return v
 }
