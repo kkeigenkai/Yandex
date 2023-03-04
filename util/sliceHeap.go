@@ -7,12 +7,6 @@ func CreateSliceHeap() *SliceHeap {
 	return &h
 }
 
-func Heapify(si []int) *SliceHeap {
-	h := CreateSliceHeap()
-
-	return h
-}
-
 func (h *SliceHeap) Push(v int) {
 	*h = append(*h, v)
 	pos := len(*h) - 1
@@ -27,13 +21,13 @@ func (h *SliceHeap) Pop() (v int) {
 	(*h)[0] = (*h)[len(*h)-1]
 	pos := 0
 	for pos*2+2 < len(*h) {
-		minPos := leftSon(pos)
-		if (*h)[minPos] < (*h)[rightSon(pos)] {
-			minPos = rightSon(pos)
+		maxPos := leftSon(pos)
+		if (*h)[maxPos] < (*h)[rightSon(pos)] {
+			maxPos = rightSon(pos)
 		}
-		if (*h)[pos] > (*h)[minPos] {
-			(*h)[pos], (*h)[minPos] = (*h)[minPos], (*h)[pos]
-			pos = minPos
+		if (*h)[pos] < (*h)[maxPos] {
+			(*h)[pos], (*h)[maxPos] = (*h)[maxPos], (*h)[pos]
+			pos = maxPos
 		} else {
 			break
 		}
