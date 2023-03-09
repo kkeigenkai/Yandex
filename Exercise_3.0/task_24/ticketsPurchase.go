@@ -1,6 +1,10 @@
 package task24
 
 func TicketPurchase(cnt int, que [][3]int) int {
+	if cnt == 1 {
+		return min(que[0][0], que[0][1], que[0][2])
+	}
+	que = append([][3]int{{0, 0, 0}}, que...)
 	t := make([]int, cnt+1)
 	t[0] = 0
 	t[1] = que[1][0]
